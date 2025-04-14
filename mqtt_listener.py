@@ -50,3 +50,6 @@ client.on_message = on_message
 # Bağlan ve dinlemeye başla
 client.connect(MQTT_BROKER, MQTT_PORT, 60)
 client.loop_forever()
+
+
+#se
