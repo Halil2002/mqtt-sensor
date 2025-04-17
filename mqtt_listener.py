@@ -54,7 +54,7 @@ client.on_message = on_message
 client.connect(MQTT_BROKER, MQTT_PORT, 60)
 client.loop_forever()
 
-#yeni bir değişiklik
+#yeni bir değişiklik yapıldımı
 
 
 #selam heytit
