@@ -1,7 +1,8 @@
 import paho.mqtt.client as mqtt
 import json
 import mysql.connector
-from datetime import datetime  # Zaman damgası eklemek için
+import matplotlib
+
 
 # ✅ MySQL bağlantısı
 db = mysql.connector.connect(
@@ -26,16 +27,14 @@ def on_message(client, userdata, msg):
         data = json.loads(msg.payload.decode())
         print("Gelen JSON veri:", data)
 
-        # Zaman damgası al
-        zaman = datetime.now()
-
-        # ✅ MySQL'e kaydet (zaman damgasını ekledik)
-        cursor.execute("INSERT INTO sensor_verileri (deger, zaman) VALUES (%s, %s)", (json.dumps(data), zaman))
+        # ✅ MySQL'e kaydet
+        cursor.execute("INSERT INTO sensor_verileri (deger) VALUES (%s)", (json.dumps(data),))
         db.commit()
         print("✅ MySQL'e kaydedildi.")
 
     except Exception as e:
         print("❌ Hata:", e)
+        
 
 # 🔌 MQTT bağlantısı sağlandığında
 def on_connect(client, userdata, flags, rc):
@@ -55,3 +54,5 @@ client.on_message = on_message
 client.connect(MQTT_BROKER, MQTT_PORT, 60)
 client.loop_forever()
 
+
+#selam hey
